@@ -46,24 +46,22 @@ class Board:
                     Peg.draw(win, selected)
                     
     def goalstate(self):
-        peg=np.array(self.board)
-        print(peg[0,5])
         self.red_ingoal = self.green_ingoal = 0
         for i in range(ROWS):
             for j in range(COLS):
                 peg=self.board[i][j]
                 if peg !=0:
-                    
                     if peg.color == RED and start_board[i,j] == 2:
                         self.red_ingoal += 1
                     if peg.color ==  GREEN and start_board[i,j] == 1:
                         self.green_ingoal += 1 
-        print(self.green_ingoal,self.red_ingoal) 
         
     def winner(self):
         if self.red_ingoal == 6:
+            print('RED WINS')
             return RED
         elif self.green_ingoal == 6:
+            print('GREEN WINS')
             return GREEN
         
         return None
