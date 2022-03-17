@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pygame
-import numpy as np
 from .constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
 from .drawing_transition_matrix import x_cord, y_cord
 from .start_board import size, start_board
@@ -118,3 +117,6 @@ class Board:
 
             moves = self.hopOver(row, col-2, moves)
         return moves
+
+    #TODO Should we add the code to identify the winning position?
+    #TODO method that returns all pieces(pegs) (e.g. current positions of either first or second player's pegs). How we identify them? By colour or just by 1,2?
