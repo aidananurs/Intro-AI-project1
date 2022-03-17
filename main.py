@@ -30,11 +30,12 @@ def main():
     clock = pygame.time.Clock()
     game = Game(WIN)
 
-    # peg = board.get_peg(0,4)
-    # board.move(peg,0,2)
-
     while run:
         clock.tick(FPS)
+        
+        if game.winner() !=None:
+            print(game.winner())
+            run = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -46,14 +47,8 @@ def main():
 
                 if not pegPositionInMatrix:
                     break
+                game.select(pegPositionInMatrix[0], pegPositionInMatrix[1])
 
-                if game.turn == GREEN:
-                    game.select(pegPositionInMatrix[0], pegPositionInMatrix[1])
-
-                pos = pygame.mouse.get_pos()
-                row, col = get_row_col_from_mouse(pos)
-                # peg = board.get_peg(row,col)
-                # board.move(peg,0,2)
         game.update()
 
     pygame.quit()
