@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pygame
-from .constants import *
+from .constants import GREEN,BLUE,RADIUS,BLACK,RED
 from .drawing_transition_matrix import x_cord, y_cord
 
 
@@ -23,8 +23,9 @@ class Peg:
 
     def draw(self, win, Peg):
         if Peg is not None and self.row == Peg.row and self.col == Peg.col:
-            pygame.draw.circle(win, GREEN, (self.x, self.y), RADIUS, 0)
+            pygame.draw.circle(win, self.color, (self.x, self.y), RADIUS, 0)
             pygame.draw.circle(win, BLUE, (self.x, self.y), RADIUS/2, 0) 
+            pygame.draw.circle(win, BLACK, (self.x, self.y), RADIUS + 2, 1)
             return
         pygame.draw.circle(win, self.color, (self.x, self.y), RADIUS, 0)
         pygame.draw.circle(win, BLACK, (self.x, self.y), RADIUS + 2, 1)

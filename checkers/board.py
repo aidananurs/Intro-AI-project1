@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pygame
+import numpy as np
 from .constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
 from .drawing_transition_matrix import x_cord, y_cord
 from .start_board import size, start_board
@@ -9,7 +10,7 @@ from .pegs import Peg
 class Board:
     def __init__(self):
         self.board = []
-        self.red_left = self.green_left = 6
+        self.red_ingoal = self.green_ingoal = 0
         self.create_board()
 
     def draw_circles(self, win):
@@ -43,6 +44,29 @@ class Board:
                 Peg = self.board[row][col]
                 if Peg != 0:
                     Peg.draw(win, selected)
+                    
+    def goalstate(self):
+        peg=np.array(self.board)
+        print(peg[0,5])
+        self.red_ingoal = self.green_ingoal = 0
+        for i in range(ROWS):
+            for j in range(COLS):
+                peg=self.board[i][j]
+                if peg !=0:
+                    
+                    if peg.color == RED and start_board[i,j] == 2:
+                        self.red_ingoal += 1
+                    if peg.color ==  GREEN and start_board[i,j] == 1:
+                        self.green_ingoal += 1 
+        print(self.green_ingoal,self.red_ingoal) 
+        
+    def winner(self):
+        if self.red_ingoal == 6:
+            return RED
+        elif self.green_ingoal == 6:
+            return GREEN
+        
+        return None
 
     def get_valid_moves(self, Peg):
         moves = []
@@ -95,37 +119,4 @@ class Board:
             moves.append([row, col - 2])
 
             moves = self.hopOver(row, col-2, moves)
-        return moves
-
-    def _traverse_right(self, start, stop, step, color, right, skipped=[]):
-        moves = {}
-        last = []
-        for r in range(start, stop, step):
-            if right < 0:
-                break
-
-            current = self.board[r][right]
-            if current == 0:
-                if skipped and not last:
-                    break
-                elif skipped:
-                    moves[(r, right)] = last + skipped
-                else:
-                    moves[(r, right)] = last
-
-                if last:
-                    if step == -1:
-                        row = max(r - 3, 0)
-                    else:
-                        row = min(r + 3, ROWS)
-                    moves.update(self._traverse_left(r + step, row, step, color, right - 1, skipped=last))
-                    moves.update(self._traverse_right(r + step, row, step, color, right + 1, skipped=last))
-                break
-            # if u can't jump over your pegs
-            # elif current.color == color:
-            #     break
-            else:
-                last = [current]
-            right -= 1
-
         return moves

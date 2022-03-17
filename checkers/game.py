@@ -22,6 +22,9 @@ class Game:
         self.board = Board()
         self.turn = GREEN
         self.valid_moves = []
+        
+    def winner(self):
+        return self.board.winner()    
 
     def reset(self):
         self._init()
@@ -45,6 +48,7 @@ class Game:
         if self.selected and not self.board.get_peg(row, col) and [row, col] in self.valid_moves:
             self.board.move(self.selected, row, col)
             self.change_turn()
+            self.board.goalstate()
         else:
             return False
         return True
@@ -57,7 +61,8 @@ class Game:
             pygame.draw.circle(self.win, GREY, (x_cord[row, col], y_cord[row, col]), RADIUS // 3, 0)
 
     def change_turn(self):
+        self.valid_moves = []
         if self.turn == GREEN:
-            self.trun = RED
+            self.turn = RED
         else:
-            self.trun = GREEN
+            self.turn = GREEN
