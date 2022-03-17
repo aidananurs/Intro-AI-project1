@@ -129,3 +129,6 @@ class Board:
             right -= 1
 
         return moves
+    
+    #TODO Should we add the code to identify the winning position?
+    #TODO method that returns all pieces(pegs) (e.g. current positions of either first or second player's pegs). How we identify them? By colour or just by 1,2?
