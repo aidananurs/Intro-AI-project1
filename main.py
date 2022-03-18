@@ -9,6 +9,7 @@ import pygame
 from checkers.constants import WIDTH, HEIGHT, RADIUS, GREEN, RED
 from checkers.drawing_transition_matrix import x_cord, y_cord
 from checkers.game import Game
+from minimax.algorithm import minimax
 
 FPS = 60
 
@@ -32,6 +33,11 @@ def main():
 
     while run:
         clock.tick(FPS)
+        
+        #if computer
+        if game.turn == RED:
+            value, row, col = minimax(game.board, 3, True, game)
+            game._move(row, col)
         
         if game.winner() !=None:
            # print(game.winner())

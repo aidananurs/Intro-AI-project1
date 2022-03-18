@@ -35,7 +35,7 @@ class Board:
                     self.board[row].append(Peg(row, col, GREEN))
                 else:
                     self.board[row].append(0)
-
+                    
     def draw(self, win, selected):
         self.draw_circles(win)
         for row in range(ROWS):
@@ -117,6 +117,19 @@ class Board:
 
             moves = self.hopOver(row, col-2, moves)
         return moves
+    
+    def get_all_pegs(self, colour):
+        pegs = []
+        for row in self.board:
+           for peg in row:
+               if peg != 0 and peg.colour == colour:
+                   pegs.append(peg)
+        return pegs
+    
+    def get_board(self):
+        return self.board
+                       
+                       
 
     #TODO Should we add the code to identify the winning position?
     #TODO method that returns all pieces(pegs) (e.g. current positions of either first or second player's pegs). How we identify them? By colour or just by 1,2?
