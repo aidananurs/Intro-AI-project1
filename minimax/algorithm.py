@@ -44,13 +44,14 @@ def get_all_moves(board, colour, game):
         valid_moves = board.get_valid_moves(peg)
         for row, col in valid_moves:
             temp_board = deepcopy(board)
-            #temp_peg = temp_board.get_peg(row, col)
+            temp_peg = temp_board.get_peg(row, col)
             #create new board after moving
-            new_board = do_move(peg, row, col, temp_board, game)
+            new_board = do_move(temp_peg, row, col, temp_board, game)
             moves.append([new_board, row, col])
     return moves
 
-def do_move(peg, row, col, temp_board, game):
+def do_move(peg, row, col, temp_board, game):   
     temp_board.move(peg, row, col)
-    return temp_board;
+    return temp_board
+
         
