@@ -39,6 +39,11 @@ def main():
             #value, row, col = minimax(game.get_board(), 3, True, game)
             value, new_board = minimax(game.get_board(), 3, True, game)
             #game.moveAI(row, col)
+            #I think we should just return the whole new board (list of object)
+            #instead of row and col, just like guy from YT
+            #game.ai_move is simply assigning the new board that is a result of 
+            #an algorithm to existing one.
+            #The update function handles drawing everything
             game.ai_move(new_board)
         
         if game.winner() !=None:
