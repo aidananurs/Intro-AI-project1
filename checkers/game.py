@@ -50,7 +50,12 @@ class Game:
         else:
             return False
         return True
-
+    
+    def moveAI(self,row,col):
+        self.board.move(self.selected, row, col)
+        self.change_turn()
+        self.board.goalstate()
+        
     def draw_valid_moves(self, moves):
         if moves is None:
             return
@@ -66,5 +71,10 @@ class Game:
             self.turn = GREEN
             
     def get_board(self):
-        print('GAME',type(self.board))
         return self.board
+    
+    #I added this like in the YT video
+    def ai_move(self,board):
+        self.board = board
+        self.change_turn()                 
+                       

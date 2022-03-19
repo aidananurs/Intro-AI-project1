@@ -9,8 +9,7 @@ from checkers.constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIU
 
 
 def minimax(position, depth, max_player, game):
-    print('MINIMAX',type(position))
-    if depth == 0 or position.winner() != None:
+    if depth == 0: #or position.winner() != None:
         return position.evaluate(), position
     if max_player:
         maxEval = float('-inf')
@@ -24,7 +23,8 @@ def minimax(position, depth, max_player, game):
                 best_move_col = col
         return maxEval, best_move_row, best_move_col
     else:
-        minEval = float('-inf')
+        #should that be float('inf'), just without minus sign
+        minEval = float('inf')
         best_move_row = None
         best_move_col = None
         for move, row, col in get_all_moves(position, GREEN, game):
@@ -57,7 +57,6 @@ def get_all_moves(board, colour, game):
     return moves
 
 def do_move(peg, row, col, temp_board, game):   
-    #print(peg,row,col)
     temp_board.move(peg, row, col)
     return temp_board
 
