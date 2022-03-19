@@ -36,8 +36,9 @@ def main():
         
         #if computer
         if game.turn == RED:
-            value, row, col = minimax(game.board, 3, True, game)
-            game._move(row, col)
+            print('MAIN',type(game.get_board()))
+            value, row, col = minimax(game.get_board(), 3, True, game)
+            game.move(row, col)
         
         if game.winner() !=None:
            # print(game.winner())

@@ -5,9 +5,11 @@ Created on Thu Mar 17 17:02:48 2022
 """
 from copy import deepcopy
 import pygame
-from .constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
+from checkers.constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
+
 
 def minimax(position, depth, max_player, game):
+    print('MINIMAX',type(position))
     if depth == 0 or position.winner() != None:
         return position.evaluate(), position
     if max_player:
@@ -25,9 +27,9 @@ def minimax(position, depth, max_player, game):
         minEval = float('-inf')
         best_move_row = None
         best_move_col = None
-        for move in get_all_moves(position, GREEN, game):
+        for move, row, col in get_all_moves(position, GREEN, game):
             evaluation = minimax(move, depth-1, True, game)[0]
-            minEval = min(maxEval, evaluation)
+            minEval = min(minEval, evaluation)
             if minEval == evaluation:
                 best_move_row = row
                 best_move_col = col
@@ -39,18 +41,23 @@ def get_all_moves(board, colour, game):
     moves = []
     
     #getting current position for each peg
-    for peg in board.get_all_moves(colour):
+    for peg in board.get_all_pegs(colour):
         #getting valid moves for each peg
         valid_moves = board.get_valid_moves(peg)
+        #print(valid_moves)
         for row, col in valid_moves:
             temp_board = deepcopy(board)
-            temp_peg = temp_board.get_peg(row, col)
+      
+            temp_peg = deepcopy(peg)
+
+            #temp_peg = temp_board.get_peg(row, col)
             #create new board after moving
             new_board = do_move(temp_peg, row, col, temp_board, game)
             moves.append([new_board, row, col])
     return moves
 
 def do_move(peg, row, col, temp_board, game):   
+    #print(peg,row,col)
     temp_board.move(peg, row, col)
     return temp_board
 

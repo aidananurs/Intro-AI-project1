@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import pygame
+import numpy as np
 from .constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
 from .drawing_transition_matrix import x_cord, y_cord
 from .start_board import size, start_board
 from .pegs import Peg
 
 
-class Board:
+class BoardClass:
     def __init__(self):
         self.board = []
         self.red_ingoal = self.green_ingoal = 0
@@ -122,12 +123,27 @@ class Board:
         pegs = []
         for row in self.board:
            for peg in row:
-               if peg != 0 and peg.colour == colour:
+               if peg != 0 and peg.color == colour:
                    pegs.append(peg)
         return pegs
     
     def get_board(self):
         return self.board
+    
+    def evaluate(self):
+        h=0
+        for i in range(ROWS):
+            for j in range(COLS):
+                peg=self.board[i][j]
+                if peg != 0:
+                    if peg.color == RED:
+                        h+=(5-j)+i
+                    if peg.color == GREEN:
+                        h-=j+(5-i)
+        self.goalstate()
+        h+=5*self.red_ingoal
+        h-=5*self.green_ingoal    
+        return h    
                        
                        
 
