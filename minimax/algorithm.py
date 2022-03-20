@@ -9,7 +9,8 @@ from checkers.constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIU
 
 
 def minimax(position, depth, max_player, game):
-    if depth == 0: #or position.winner() != None:
+    position.goalstate()
+    if depth == 0 or position.winner() != None:
         return position.evaluate(), position
     if max_player:
         maxEval = float('-inf')

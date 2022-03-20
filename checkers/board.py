@@ -137,12 +137,12 @@ class BoardClass:
                 peg=self.board[i][j]
                 if peg != 0:
                     if peg.color == RED:
-                        h+=(5-j)+i
+                        h+=j+(5-i)
                     if peg.color == GREEN:
-                        h-=j+(5-i)
+                        h-=(5-j)+i
         self.goalstate()
-        h+=0.5*self.red_ingoal
-        h-=0.5*self.green_ingoal 
+        h+=5*self.red_ingoal
+        h-=5*self.green_ingoal 
         print(h)
         return h    
 
