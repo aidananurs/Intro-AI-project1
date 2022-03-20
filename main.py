@@ -33,11 +33,12 @@ def main():
 
     while run:
         clock.tick(FPS)
-        
+        #print(game.turn)
         #if computer
         if game.turn == RED:
             #value, row, col = minimax(game.get_board(), 3, True, game)
             value, new_board = minimax(game.get_board(), 3, True, game)
+  
             #game.moveAI(row, col)
             #I think we should just return the whole new board (list of object)
             #instead of row and col, just like guy from YT

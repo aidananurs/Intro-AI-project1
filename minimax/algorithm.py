@@ -19,6 +19,7 @@ def minimax(position, depth, max_player, game):
             maxEval = max(maxEval, evaluation)
             if maxEval == evaluation:
                 best_move = move
+                print('a')
         return maxEval, best_move
     else:
         #should that be float('inf'), just without minus sign
