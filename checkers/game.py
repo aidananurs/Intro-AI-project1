@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import pygame
 from .constants import GREEN, RED, GREY, RADIUS, BLUE
-from checkers.board import Board
+from checkers.board import BoardClass
 from checkers.drawing_transition_matrix import x_cord, y_cord
 
-
-# board=Board()
 
 class Game:
     def __init__(self, win):
@@ -19,7 +17,7 @@ class Game:
 
     def _init(self):
         self.selected = None
-        self.board = Board()
+        self.board = BoardClass()
         self.turn = GREEN
         self.valid_moves = []
         
@@ -31,7 +29,7 @@ class Game:
 
     def select(self, row, col):
         if self.selected:
-            result = self._move(row, col)
+            result = self.move(row, col)
             if not result:
                 self.selected = None
                 self.select(row, col)
@@ -44,7 +42,7 @@ class Game:
 
         return False
 
-    def _move(self, row, col):
+    def move(self, row, col):
         if self.selected and not self.board.get_peg(row, col) and [row, col] in self.valid_moves:
             self.board.move(self.selected, row, col)
             self.change_turn()
@@ -52,7 +50,12 @@ class Game:
         else:
             return False
         return True
-
+    
+    def moveAI(self,row,col):
+        self.board.move(self.selected, row, col)
+        self.change_turn()
+        self.board.goalstate()
+        
     def draw_valid_moves(self, moves):
         if moves is None:
             return
@@ -66,3 +69,12 @@ class Game:
             self.turn = RED
         else:
             self.turn = GREEN
+            
+    def get_board(self):
+        return self.board
+    
+    #I added this like in the YT video
+    def ai_move(self,board):
+        self.board = board
+        self.change_turn()                 
+                       
