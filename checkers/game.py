@@ -11,7 +11,7 @@ class Game:
         self.win = win
 
     def update(self):
-        self.board.draw(self.win,self.selected)
+        self.board.draw(self.win, self.selected)
         self.draw_valid_moves(self.valid_moves)
         pygame.display.update()
 
@@ -76,5 +76,6 @@ class Game:
     #I added this like in the YT video
     def ai_move(self,board):
         self.board = board
+        self.board.goalstate()
         self.change_turn()                 
                        

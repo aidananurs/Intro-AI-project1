@@ -14,8 +14,8 @@ class Peg:
         self.y = 0
         self.calc_pos()
 
-    def goalstate(self):
-        self.goal = True
+    #def goalstate(self):
+        #self.goal = True
 
     def calc_pos(self):
         self.x = x_cord[self.row, self.col]

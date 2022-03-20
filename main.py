@@ -38,7 +38,6 @@ def main():
         if game.turn == RED:
             #value, row, col = minimax(game.get_board(), 3, True, game)
             value, new_board = minimax(game.get_board(), 3, True, game)
-  
             #game.moveAI(row, col)
             #I think we should just return the whole new board (list of object)
             #instead of row and col, just like guy from YT
@@ -58,7 +57,6 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 pegPositionInMatrix = get_row_col_from_mouse(pos)
-
                 if not pegPositionInMatrix:
                     break
                 game.select(pegPositionInMatrix[0], pegPositionInMatrix[1])
