@@ -39,7 +39,7 @@ def get_all_moves(board, colour, game):
     moves = []
     
     #getting current position for each peg
-    for peg in board.get_all_moves(colour):
+    for peg in board.get_all_pegs(colour):
         #getting valid moves for each peg
         valid_moves = board.get_valid_moves(peg)
         for row, col in valid_moves:
