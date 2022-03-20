@@ -54,6 +54,6 @@ def get_all_moves(board, colour, game):
 
 def do_move(peg, row, col, temp_board, game):   
     temp_board.move(peg, row, col)
-    return temp_board
+    return temp_board.get_board()
 
         
