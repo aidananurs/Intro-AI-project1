@@ -21,6 +21,7 @@ def minimax(position, depth, max_player, game):
                 best_move = move
         return maxEval, best_move
     else:
+        #should that be float('inf'), just without minus sign
         minEval = float('inf')
         best_move = None
         for move in get_all_moves(position, GREEN, game):
@@ -28,12 +29,13 @@ def minimax(position, depth, max_player, game):
             minEval = min(minEval, evaluation)
             if minEval == evaluation:
                 best_move = move
-        return minEval, move
+            return minEval, move
         
         
 
 def get_all_moves(board, colour, game):
     moves = []
+    
     #getting current position for each peg
     for peg in board.get_all_pegs(colour):
         #getting valid moves for each peg
@@ -42,11 +44,13 @@ def get_all_moves(board, colour, game):
         for row, col in valid_moves:
             temp_board = deepcopy(board)
       
-            #temp_peg = deepcopy(peg)
+            temp_peg = deepcopy(peg)
+            temp_peg_row = deepcopy(row)
+            temp_peg_col = deepcopy(col)
 
             temp_peg = temp_board.get_peg(peg.row, peg.col)
             #create new board after moving
-            new_board = do_move(temp_peg, row, col, temp_board, game)
+            new_board = do_move(temp_peg, temp_peg_row, temp_peg_col, temp_board, game)
             moves.append(new_board)
     return moves
 
