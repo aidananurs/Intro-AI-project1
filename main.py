@@ -39,12 +39,11 @@ def main():
             game.ai_move(new_board)
             
         if game.winner() !=None:
-            if game.winner == RED:
+            winner = game.winner()
+            if winner == RED:
                 print('RED WINS')
-                return RED
-            elif game.winner == GREEN:
+            elif winner == GREEN:
                 print('GREEN WINS')
-                return GREEN
             run = False
 
         for event in pygame.event.get():

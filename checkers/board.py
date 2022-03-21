@@ -58,10 +58,8 @@ class BoardClass:
         
     def winner(self):
         if self.red_ingoal == 6:
-            print('RED WINS')
             return RED
         elif self.green_ingoal == 6:
-            print('GREEN WINS')
             return GREEN
         
         return None
