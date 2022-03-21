@@ -4,10 +4,9 @@ Created on Thu Mar 17 17:02:48 2022
 @author: Aidana
 """
 from copy import deepcopy
-import pygame
-from checkers.constants import ROWS, COLS, BLUE, WHITE, BLACK, GREEN, RED, RADIUS
+from checkers.constants import GREEN, RED
 
-
+#recurring minimax algorythm for given depth
 def minimax(position, depth, max_player, game):
     position.goalstate()
     if depth == 0 or position.winner() != None:
