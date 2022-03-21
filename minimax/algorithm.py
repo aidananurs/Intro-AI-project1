@@ -22,7 +22,6 @@ def minimax(position, depth, max_player, game):
                 best_move = move
         return maxEval, best_move
     else:
-        #should that be float('inf'), just without minus sign
         minEval = float('inf')
         best_move = None
         for move in get_all_moves(position, GREEN, game):
@@ -41,7 +40,6 @@ def get_all_moves(board, colour, game):
     for peg in board.get_all_pegs(colour):
         #getting valid moves for each peg
         valid_moves = board.get_valid_moves(peg)
-        #print(valid_moves)
         for row, col in valid_moves:
             temp_board = deepcopy(board)
       

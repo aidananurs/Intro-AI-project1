@@ -73,7 +73,6 @@ class Game:
     def get_board(self):
         return self.board
     
-    #I added this like in the YT video
     def ai_move(self,board):
         self.board = board
         self.board.goalstate()
